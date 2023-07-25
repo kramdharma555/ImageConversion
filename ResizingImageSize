@@ -1,0 +1,25 @@
+from PIL import Image
+import os
+
+def resize_images(input_folder, output_folder, target_size=(150, 150)):  // Here we can set the Target Size of our desired 
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+
+    image_files = os.listdir(input_folder)      // Retrieving the Images
+
+    for image_file in image_files:
+        image_path = os.path.join(input_folder, image_file)
+        output_path = os.path.join(output_folder, image_file)
+
+        try:
+            img = Image.open(image_path)
+            img = img.resize(target_size, Image.ANTIALIAS)
+            img.save(output_path)
+            print(f"{image_file} Resized Successfully.")
+        except Exception as e:
+            print(f"Producing Error while processing the Images {image_file}: {e}")
+
+# Example usage
+input_folder = "D://VU//EthirNeechal//CV//CNN//package//Weather//dataset2//Cloudy"             // Input the images location
+output_folder = "D://VU//EthirNeechal//CV//CNN//package//Weather//dataset2//CloudyNew"         // Produces the new output folder
+resize_images(input_folder, output_folder)
